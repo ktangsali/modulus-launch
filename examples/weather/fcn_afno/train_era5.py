@@ -101,22 +101,22 @@ def main(cfg: DictConfig) -> None:
     #     name="FourCastNet-Training",
     #     group="FCN-DDP-Group",
     # )
-    initialize_mlflow(
-        experiment_name="Modulus-Launch-Dev",
-        experiment_desc="Modulus launch development",
-        run_name="FCN-Training",
-        run_desc="FCN ERA5 Training",
-        user_name="Modulus User",
-        mode="offline",
-    )
-    LaunchLogger.initialize(use_mlflow=True)  # Modulus launch logger
+    #initialize_mlflow(
+    #    experiment_name="Modulus-Launch-Dev",
+    #    experiment_desc="Modulus launch development",
+    #    run_name="FCN-Training",
+    #    run_desc="FCN ERA5 Training",
+    #    user_name="Modulus User",
+    #    mode="offline",
+    #)
+    LaunchLogger.initialize(use_mlflow=False)  # Modulus launch logger
     logger = PythonLogger("main")  # General python logger
 
     datapipe = ERA5HDF5Datapipe(
         data_dir="/data/train/",
         stats_dir="/data/stats/",
         channels=[i for i in range(20)],
-        num_samples_per_year=1456,  # Need better shard fix
+        num_samples_per_year=1440,  # Need better shard fix
         batch_size=2,
         patch_size=(8, 8),
         num_workers=8,

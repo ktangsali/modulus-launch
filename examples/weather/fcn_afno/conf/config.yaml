@@ -21,3 +21,4 @@ hydra:
 wb_artifacts: False
 
 start_epoch: 0
+max_epoch: 80
